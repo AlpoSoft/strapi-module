@@ -6,6 +6,7 @@ import type { Strapi3Error } from '../types/v3'
 import { useStrapiUrl } from './useStrapiUrl'
 import { useStrapiVersion } from './useStrapiVersion'
 import { useStrapiToken } from './useStrapiToken'
+import { useStrapiAPIToken } from './useStrapiAPIToken'
 
 const defaultErrors = (err: FetchError) => ({
   v4: {
@@ -28,12 +29,15 @@ export const useStrapiClient = () => {
   const baseURL = useStrapiUrl()
   const version = useStrapiVersion()
   const token = useStrapiToken()
+  const apiToken = useStrapiAPIToken().getToken()
 
   return async <T> (url: string, fetchOptions: FetchOptions = {}): Promise<T> => {
     const headers: HeadersInit = {}
 
     if (token && token.value) {
       headers.Authorization = `Bearer ${token.value}`
+    } else if (apiToken) {
+      headers.Authorization = `Bearer ${apiToken}`
     }
 
     // Map params according to strapi v4 format

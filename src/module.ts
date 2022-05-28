@@ -34,6 +34,13 @@ export interface ModuleOptions {
    * @type CookieOptions
   */
    cookie?: CookieOptions
+
+   /**
+  * Strapi API Token
+  * @default process.env.STRAPI_TOKEN
+  * @type string
+  */
+  token?: string
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -62,13 +69,15 @@ export default defineNuxtModule<ModuleOptions>({
       url: options.url,
       prefix: options.prefix,
       version: options.version,
-      cookie: options.cookie
+      cookie: options.cookie,
+      token: options.token
     })
     nuxt.options.runtimeConfig.strapi = defu(nuxt.options.runtimeConfig.strapi, {
       url: options.url,
       prefix: options.prefix,
       version: options.version,
-      cookie: options.cookie
+      cookie: options.cookie,
+      token: options.token
     })
 
     // Transpile runtime
