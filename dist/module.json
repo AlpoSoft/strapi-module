@@ -1,0 +1,9 @@
+{
+  "name": "@nuxtjs/strapi",
+  "configKey": "strapi",
+  "compatibility": {
+    "nuxt": "^3.0.0 || ^2.16.0",
+    "bridge": true
+  },
+  "version": "1.4.0"
+}
